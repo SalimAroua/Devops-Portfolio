@@ -1,5 +1,6 @@
-tn\esprit\saroua\portfolioservice\controllers\ExperienceControllerTest.class
 tn\esprit\saroua\portfolioservice\controllers\PortfolioControllerTest.class
 tn\esprit\saroua\portfolioservice\PortfolioServiceApplicationTests.class
+tn\esprit\saroua\portfolioservice\integration\PortfolioIntegrationTest.class
 tn\esprit\saroua\portfolioservice\controllers\CertificationControllerTest.class
+tn\esprit\saroua\portfolioservice\controllers\ExperienceControllerTest.class
 tn\esprit\saroua\portfolioservice\controllers\SkillControllerTest.class

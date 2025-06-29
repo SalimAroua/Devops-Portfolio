@@ -1,5 +1,6 @@
 package tn.esprit.saroua.portfolioservice.controllers;
 
+import org.springframework.http.HttpStatus;
 import tn.esprit.saroua.portfolioservice.dto.PortfolioRequest;
 import tn.esprit.saroua.portfolioservice.dto.PortfolioResponse;
 import tn.esprit.saroua.portfolioservice.services.PortfolioService;
@@ -19,9 +20,11 @@ public class PortfolioController {
     private final PortfolioService service;
 
     @PostMapping
-    public ResponseEntity<PortfolioResponse> create(@Valid @RequestBody PortfolioRequest request) {
-        return ResponseEntity.ok(service.create(request));
+    @ResponseStatus(HttpStatus.CREATED)
+    public PortfolioResponse create(@RequestBody PortfolioRequest request) {
+        return service.create(request);
     }
+
 
     @GetMapping
     public ResponseEntity<List<PortfolioResponse>> getAll() {
