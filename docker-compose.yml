@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6
+    container_name: mongo-portfolio
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - portfolio-net
+
+  backend:
+    build: .
+    container_name: portfolio-service
+    restart: always
+    depends_on:
+      - mongodb
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/portfolio_db
+    networks:
+      - portfolio-net
+
+volumes:
+  mongo_data:
+
+networks:
+  portfolio-net:
