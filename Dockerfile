@@ -1,11 +1,22 @@
-# Utilise une image Java officielle
-FROM openjdk:17-jdk-slim
+# Étape 1 : Build Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS build
+WORKDIR /app
 
-# Port exposé
-EXPOSE 8080
+# Copier tout le code source + pom.xml
+COPY . .
 
-# Copie le jar généré dans le conteneur
-COPY target/portfolio-service-0.0.1-SNAPSHOT.jar app.jar
+# Compiler et créer le JAR (sans tests ici car exécutés via Jenkins)
+RUN mvn clean package -DskipTests
 
-# Commande d'exécution
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Étape 2 : Image d'exécution
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+
+# Copier le JAR depuis l'étape précédente
+COPY --from=build /app/target/*.jar app.jar
+
+# Exposer le port de l’application
+EXPOSE 9090
+
+# Commande de lancement
+ENTRYPOINT ["java", "-jar", "app.jar"]
