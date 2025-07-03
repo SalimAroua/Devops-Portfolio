@@ -4,7 +4,7 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://mongodb:27017/portfolio_db
+      uri: spring.data.mongodb.uri: mongodb://192.168.50.4:27017/portfolio
 
 server:
   port: 9090
